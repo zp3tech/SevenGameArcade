@@ -1,0 +1,13 @@
+.grid {
+    position: relative;
+    width: 600px;
+    height: 300px;
+    border: solid black 1px;
+}
+
+.block {
+    position: absolute;
+    width: 100px;
+    height: 20px;
+    background-color: blue;
+}
