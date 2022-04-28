@@ -1,0 +1,78 @@
+.grid {
+  border: 1px solid black;
+  height: 180px;
+  width: 180px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.grid div {
+  height: 20px;
+  width: 20px;
+
+}
+
+.ending-block {
+  background-color: red;
+}
+
+.starting-block {
+  background-color: blue;
+}
+
+.log-left,
+.log-right {
+  background-color: rgb(0, 225, 255);
+}
+
+.l1 {
+  background-image: url('images/log-left.png');
+  background-repeat: no-repeat;
+  background-size: 20px 20px;
+}
+
+.l2 {
+  background-image: url('images/log-middle.png');
+  background-repeat: no-repeat;
+  background-size: 20px 20px;
+}
+
+.l3 {
+  background-image: url('images/log-right.png');
+  background-repeat: no-repeat;
+  background-size: 20px 20px;
+}
+
+.car-left {
+  border-top: 2px dashed yellow;
+}
+
+.c1 {
+  background-repeat: no-repeat;
+  background-size: 20px 20px;
+  background-color: lightgrey;
+}
+
+.c1.car-right {
+  background-image: url('images/carNoBg-1.png');
+
+}
+
+.c1.car-left {
+  background-image: url('images/carNoBG-2.png');
+  -webkit-transition: margin-right 1s ease-in-out;
+}
+
+
+
+.c2,
+.c3 {
+  background-color: lightgrey;
+}
+
+
+.frog {
+  background-image: url('images/nobgFrog.png') !important;
+  background-repeat: no-repeat;
+  background-size: 20px 20px;
+}
