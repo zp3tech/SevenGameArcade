@@ -48,22 +48,56 @@
 }
 
 .c1 {
+  overflow: hidden;
   background-repeat: no-repeat;
   background-size: 20px 20px;
   background-color: lightgrey;
 }
 
-.c1.car-right {
-  background-image: url('images/carNoBg-1.png');
-
+.c1.car-right img {
+  position: relative;
+  overflow: hidden;
+  width: 20px;
+  height: 20px;
+  animation-duration: 0.5s;
+  animation-name: slide-to-right;
 }
 
-.c1.car-left {
-  background-image: url('images/carNoBG-2.png');
-  -webkit-transition: margin-right 1s ease-in-out;
+@keyframes slide-to-right {
+  from {
+    right: 15px;
+  }
+
+  25% {
+    right: 0px;
+  }
+
+  to {
+    right: -1px;
+  }
 }
 
+.c1.car-left img {
+  position: relative;
+  width: 20px;
+  height: 20px;
+  animation-duration: 2s;
+  animation-name: slide-to-left;
+}
 
+@keyframes slide-to-left {
+  from {
+    left: 15px;
+  }
+
+  10% {
+    left: 0px;
+  }
+
+  to {
+    left: -5px;
+  }
+}
 
 .c2,
 .c3 {
@@ -72,7 +106,23 @@
 
 
 .frog {
-  background-image: url('images/nobgFrog.png') !important;
+  background-image: url('images/nobgFrog.png');
   background-repeat: no-repeat;
-  background-size: 20px 20px;
+  background-size: 14px 14px;
+  background-position: center;
+}
+
+.l1.frog{
+  background-image: url('images/nobgFrog.png'), url('images/log-left.png');
+  background-size: 14px 14px, 20px 20px;
+}
+.l2.frog {
+  background-image: url('images/nobgFrog.png'), url('images/log-middle.png');
+  background-size: 14px 14px, 20px 20px;
+
+}
+.l3.frog {
+  background-image: url('images/nobgFrog.png'), url('images/log-right.png');
+  background-size: 14px 14px, 20px 20px;
+
 }

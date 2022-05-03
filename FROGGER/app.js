@@ -15,7 +15,7 @@ let currentIndex = 76 // starting block div index
 
 function moveFrog(e) {
   squares[currentIndex].classList.remove('frog')
-
+  e.prevent
   switch (e.key) {
     case 'ArrowLeft':
       // if frog in far left column break and don't move left
@@ -42,11 +42,32 @@ function moveFrog(e) {
 }
 
 // if 'keyup' happens, then do moveFrog function
-document.addEventListener('keyup', moveFrog)
+document.addEventListener('keydown', moveFrog)
 
 
-// CAR MOVEMENTS
-function moveCarLeft(carLeft) {
+// init car image divs
+function carsInit() {
+  carsLeft.forEach(car => {
+    var image = document.createElement('img')
+    image.setAttribute('src', 'images/carNoBG-2.png')
+    image.width = '20px'
+    image.height = '20px'
+    car.appendChild(image)
+  })
+
+  carsRight.forEach(car => {
+    var image = document.createElement('img')
+    image.setAttribute('src', 'images/carNoBg-1.png')
+    image.width = '20px'
+    image.height = '20px'
+    car.appendChild(image)
+  })
+}
+
+carsInit()
+
+// yellow car has class c1
+function moveCarLeft() {
   carsLeft.forEach(carLeft => {
     switch (true) {
       case carLeft.classList.contains('c1'):
@@ -56,6 +77,7 @@ function moveCarLeft(carLeft) {
       case carLeft.classList.contains('c2'):
         carLeft.classList.remove('c2')
         carLeft.classList.add('c3')
+        
         break
       case carLeft.classList.contains('c3'):
         carLeft.classList.remove('c3')
@@ -65,6 +87,7 @@ function moveCarLeft(carLeft) {
   })
 }
 
+// black car has class c1
 function moveCarRight(carRight) {
   carsRight.forEach(carRight => {
     switch (true) {
@@ -84,9 +107,13 @@ function moveCarRight(carRight) {
   })
 }
 
-// timer for moving cars
-setInterval(moveCarLeft, 1500)
-setInterval(moveCarRight, 500)
+// yellow car
+const leftAnimationTime = 2000
+setInterval(moveCarLeft, leftAnimationTime) 
+
+// black car
+const rightAnimationTime = 500
+setInterval(moveCarRight, rightAnimationTime)  
 
 
 // LOG MOVEMENTS
@@ -147,3 +174,26 @@ function moveLogRight(logRight) {
 // timer for moving logs
 setInterval(moveLogLeft, 420)
 setInterval(moveLogRight, 690)
+
+
+
+window.addEventListener('keydown', (e) => {
+  if (e.target.localName != 'input') {   // if you need to filter <input> elements
+      switch (e.keyCode) {
+          case 37: // left
+          case 39: // right
+              e.preventDefault();
+              break;
+          case 38: // up
+          case 40: // down
+              e.preventDefault();
+              break;
+          default:
+              break;
+      }
+  }
+}, {
+  capture: true,   // this disables arrow key scrolling in modern Chrome
+  passive: false   // this is optional, my code works without it
+});
+
