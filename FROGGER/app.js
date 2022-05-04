@@ -16,7 +16,7 @@ const leftAnimationTime = 2000
 const rightAnimationTime = 500
 
 // Location of Frog (76 is starting block div index)
-const startBlock = 17
+const startBlock = 76
 let currentIndex = startBlock
 
 // set time length for game
