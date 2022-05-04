@@ -1,3 +1,7 @@
+button {
+  width: 100px;
+}
+
 .grid {
   border: 1px solid black;
   height: 180px;
@@ -48,6 +52,7 @@
 }
 
 .c1 {
+  position: relative;
   overflow: hidden;
   background-repeat: no-repeat;
   background-size: 20px 20px;
@@ -55,8 +60,7 @@
 }
 
 .c1.car-right img {
-  position: relative;
-  overflow: hidden;
+  position: absolute;
   width: 20px;
   height: 20px;
   animation-duration: 0.5s;
@@ -78,7 +82,7 @@
 }
 
 .c1.car-left img {
-  position: relative;
+  position: absolute;
   width: 20px;
   height: 20px;
   animation-duration: 2s;
@@ -116,13 +120,19 @@
   background-image: url('images/nobgFrog.png'), url('images/log-left.png');
   background-size: 14px 14px, 20px 20px;
 }
+
 .l2.frog {
   background-image: url('images/nobgFrog.png'), url('images/log-middle.png');
   background-size: 14px 14px, 20px 20px;
-
 }
+
 .l3.frog {
   background-image: url('images/nobgFrog.png'), url('images/log-right.png');
   background-size: 14px 14px, 20px 20px;
+}
 
+img.dead {
+  animation: none !important;
+  width: 20px;
+  height: 20px;
 }
