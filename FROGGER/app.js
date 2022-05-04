@@ -16,10 +16,12 @@ const leftAnimationTime = 2000
 const rightAnimationTime = 500
 
 // Location of Frog (76 is starting block div index)
-let currentIndex = 76
+const startBlock = 17
+let currentIndex = startBlock
 
 // set time length for game
-let currentTime = 20
+const timeLength = 69
+let currentTime = timeLength
 timeLeftDisplay.textContent = currentTime
 
 startPauseButton.addEventListener('click', () => {
@@ -31,9 +33,9 @@ startPauseButton.addEventListener('click', () => {
     startPauseButton.textContent = "Resume"
   } else {
     // resets initial game conditions 
-    currentTime = 20
+    currentTime = timeLength
     timeLeftDisplay.textContent = currentTime
-    currentIndex = 76
+    currentIndex = startBlock
     squares[currentIndex].classList.add('frog')
     startGame()
     startPauseButton.textContent = "Pause"
@@ -42,8 +44,9 @@ startPauseButton.addEventListener('click', () => {
 
 
 function startGame() {
-  winOrLoseTimerId = setInterval(winOrLose, 50)
   carsInit()
+  squares[currentIndex].classList.add('frog')
+  winOrLoseTimerId = setInterval(winOrLose, 50)
   document.addEventListener('keydown', moveFrog)
   gameTimerId = setInterval(timer, 1000)
   carLeftMover = setInterval(moveCarLeft, leftAnimationTime)
@@ -97,7 +100,8 @@ function winOrLose() {
 
 function moveFrog(e) {
   squares[currentIndex].classList.remove('frog')
-  e.prevent
+  // console.log(e)
+  // console.log(e.key)
   switch (e.key) {
     case 'ArrowLeft':
       // if frog in far left column break and don't move left
@@ -161,7 +165,7 @@ function moveCarLeft() {
   })
 }
 
-function moveCarRight(carRight) {
+function moveCarRight() {
   carsRight.forEach(carRight => {
     switch (true) {
       case carRight.classList.contains('c1'):
@@ -180,8 +184,17 @@ function moveCarRight(carRight) {
   })
 }
 
-function moveLogLeft(logLeft) {
+function moveLogLeft() {
   logsLeft.forEach(logLeft => {
+
+    if (logLeft.classList.contains('frog')) {
+      if (currentIndex % width !== 0) {
+        logLeft.classList.remove('frog')
+        currentIndex--
+        squares[currentIndex].classList.add('frog')
+      }
+    }
+
     switch (true) {
       case logLeft.classList.contains('l1'):
         logLeft.classList.remove('l1')
@@ -207,8 +220,20 @@ function moveLogLeft(logLeft) {
   })
 }
 
-function moveLogRight(logRight) {
+function moveLogRight() {
+
+  // since forEach loops "to the right" thru grid, need bool value for if frog already moved
+  let frogHasBeenMoved = false
+
   logsRight.forEach(logRight => {
+
+    if (logRight.classList.contains('frog') && currentIndex % width !== (width - 1) && !frogHasBeenMoved) {
+      frogHasBeenMoved = true
+      logRight.classList.remove('frog')
+      currentIndex++
+      squares[currentIndex].classList.add('frog')
+    }
+
     switch (true) {
       case logRight.classList.contains('l1'):
         logRight.classList.remove('l1')
