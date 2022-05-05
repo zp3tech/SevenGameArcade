@@ -1,4 +1,4 @@
-.grid {
+.master-grid {
     border: 1px solid;
     height: 120px;
     width: 140px;
@@ -6,9 +6,19 @@
     flex-wrap: wrap;
 }
 
-.grid div {
+.master-grid div {
     border: 1px dashed darkblue;
     height: 18px;
     width: 18px;
-    background-color: blue;
 }
+
+.player-one {
+    background-color: red;
+    border-radius: 10px;
+}
+
+.player-two {
+    background-color: black;
+    border-radius: 10px;
+}
+
