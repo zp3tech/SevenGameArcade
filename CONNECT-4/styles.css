@@ -1,5 +1,6 @@
 .master-grid {
-    border: 1px solid;
+    border: 1px solid blue;
+    background-color: blue;
     height: 120px;
     width: 140px;
     display: flex;
@@ -7,18 +8,23 @@
 }
 
 .master-grid div {
-    border: 1px dashed darkblue;
-    height: 18px;
-    width: 18px;
+    border-radius: 10px;
+    background-color: white;
+    height: 20px;
+    width: 20px;
 }
 
-.player-one {
+div.player-one {
     background-color: red;
     border-radius: 10px;
 }
 
-.player-two {
+div.player-two {
     background-color: black;
     border-radius: 10px;
+}
+
+div.highlighted-col {
+    background-color: grey;
 }
 
