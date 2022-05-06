@@ -15,13 +15,13 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     const squares = document.querySelectorAll('.master-grid div')
-    const displayWinner = document.querySelector('#winner')
-    const displayCurrentPlayer = document.querySelector('#current-player')
+    const winnerDisplay = document.querySelector('#winner')
+    const currentPlayerDisplay = document.querySelector('#current-player')
 
     let currentPlayer = 1
     let prevPlayer = 1
 
-    displayCurrentPlayer.innerHTML = currentPlayer + ' (red)'
+    currentPlayerDisplay.innerHTML = currentPlayer + ' (red)'
 
     let counter
 
@@ -39,11 +39,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // checks horizontal wins
     function checkHorizontal(index, playerString) {
-        // start checking for wins on far left column
-        index -= index % boardWidth
-        for (let i = 0; i < boardWidth; i++) {
-            
-        } 
+        let numPositionsToLeft = index % boardWidth
+        let numPositionsToRight = boardWidth - numPositionsToLeft - 1
+        
+        // check to left
+        for (let i = 1; i <= numPositionsToLeft; i++) {
+            if (squares[index - i].classList.contains(playerString)) counter++
+            else break
+        }
+
+        // check to right
+        for (let j = 1; j <= numPositionsToRight; j++) {
+            if (squares[index + j].classList.contains(playerString)) counter++
+            else break
+        }
     }
 
     // runs all directions to check for win
@@ -57,12 +66,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
         counter = 1
         checkVertical(index, playerString)
-        checkWin(pNum)
+        displayTheWinner(pNum)
 
         // checks for left/right wins
         counter = 1
         checkHorizontal(index, playerString)
-        checkWin(pNum)
+        displayTheWinner(pNum)
         
         // checks for diagonal wins
         // counter = 1 
@@ -71,11 +80,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     }
 
-    function checkWin(pNum) {
+    function displayTheWinner(pNum) {
         if (counter == 4) {
             color = ' (red)'
             if (pNum == 2) color = ' (black)'
-            displayWinner.textContent = 'Player ' + pNum + color
+            winnerDisplay.textContent = 'Player ' + pNum + color
             // TODO: end/stop the game
         }
     }
@@ -113,14 +122,14 @@ document.addEventListener('DOMContentLoaded', () => {
                         sqInCol[j].classList.add('token')
                         sqInCol[j].classList.remove('highlighted-col')
                         currentPlayer = 2
-                        displayCurrentPlayer.innerHTML = currentPlayer + ' (black)'
+                        currentPlayerDisplay.innerHTML = currentPlayer + ' (black)'
                         break
                     case 2:
                         sqInCol[j].classList.add('player-two')
                         sqInCol[j].classList.add('token')
                         sqInCol[j].classList.remove('highlighted-col')
                         currentPlayer = 1
-                        displayCurrentPlayer.innerHTML = currentPlayer + ' (red)'
+                        currentPlayerDisplay.innerHTML = currentPlayer + ' (red)'
                         break
                 }
                 break
