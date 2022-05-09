@@ -1,4 +1,18 @@
+h3 {
+    margin-bottom: 0px;
+}
+
+h4 {
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
+#new-game {
+    margin: 20px;
+}
+
 .master-grid {
+    margin: 20px;
     border: 1px solid blue;
     background-color: blue;
     height: 120px;
