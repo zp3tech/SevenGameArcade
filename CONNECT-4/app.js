@@ -165,7 +165,7 @@ document.addEventListener('DOMContentLoaded', () => {
         gameSetup()
     }
 
-    // run inital game setup on DOMContentLoaded
+    // run initial game setup on DOMContentLoaded
     gameSetup()
     
     // contains listeners for col highlight and assignments of onclick logic for each square
@@ -224,6 +224,14 @@ document.addEventListener('DOMContentLoaded', () => {
                             currentPlayerDisplay.innerHTML = currentPlayer + ' (red)'
                             break
                     }
+
+                    // if column full, disable onclick for that column
+                    if (sqInCol[0].classList.contains('player-one') || sqInCol[0].classList.contains('player-two')) {
+                        sqInCol.forEach(square => {
+                            square.onclick = null
+                        });
+                    }
+
                     break
                 }
     
