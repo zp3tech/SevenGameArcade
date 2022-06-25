@@ -1,3 +1,3 @@
 # SevenGameArcade
 
- freecodecamp.org tutorial to learn (practice) JavaScript
+freecodecamp.org tutorial to learn (practice) JavaScript

@@ -1,0 +1,31 @@
+.grid {
+  width: 300px;
+  height: 300px;
+  border: solid black 1px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.grid div {
+  width: 20px;
+  height: 20px;
+}
+
+.invader {
+  background-color: purple;
+  border-radius: 10px;
+}
+
+.shooter {
+  background-color: grey;
+  border-radius: 10px;
+}
+
+.laser {
+  background: linear-gradient(to right, white 40%, red 40%, red 60%, white 60%);
+}
+
+.boom {
+  background-image: url('images/skull-nobg.png');
+  background-size: 20px 20px;
+}
