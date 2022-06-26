@@ -22,23 +22,32 @@ let moleSpeed = 350
 
 
 function startRestart() {
+  // reset hits & misses
+  hits, misses = 0
+  hitsDisplay.textContent = 0
+  missesDisplay.textContent = 0
+  accuDisplay.textContent = null
+
   // reset timer
   clearInterval(countDownTimerId)
   currentTime = TIME_LENGTH
 
+  // reset mole movement
+  clearTimeout(moveMoleTimerId)
+  
   // restart timer
   countDownTimerId = setInterval(countDown, 1000)
   timeLeft.textContent = currentTime
 
-  // assign hits/misses for each square in grid
+  // assign hits/misses click event for each square in grid
   squares.forEach(square => {
-    square.addEventListener('mousedown', respondToClick)
+    square.addEventListener('mousedown', onHitOrMiss)
   })
 
   moveMole()
 }
 
-function respondToClick() {
+function onHitOrMiss() {
   if (this.id == hitPosition) {
     hits++
     hitsDisplay.textContent = hits  
@@ -49,7 +58,7 @@ function respondToClick() {
   accuDisplay.textContent = hits / (hits + misses) * 100
 }
 
-// round timer
+// round timer and removal of click events
 function countDown() {
   currentTime--
   timeLeft.textContent = currentTime
@@ -58,7 +67,7 @@ function countDown() {
     clearTimeout(moveMoleTimerId)
 
     squares.forEach(square => {
-      square.removeEventListener('mousedown', respondToClick)
+      square.removeEventListener('mousedown', onHitOrMiss)
     })
   }
 }
