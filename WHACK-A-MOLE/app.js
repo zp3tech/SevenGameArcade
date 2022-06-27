@@ -22,11 +22,15 @@ let moleSpeed = 350
 
 
 function startRestart() {
-  // reset hits & misses
+  // reset hits & misses display
   hits, misses = 0
   hitsDisplay.textContent = 0
   missesDisplay.textContent = 0
   accuDisplay.textContent = null
+
+  // clear center square's text
+  squares[4].textContent = null
+
 
   // reset timer
   clearInterval(countDownTimerId)
@@ -68,7 +72,9 @@ function countDown() {
 
     squares.forEach(square => {
       square.removeEventListener('mousedown', onHitOrMiss)
+      square.classList.remove('mole')
     })
+    squares[4].textContent = "TIME!"
   }
 }
 
@@ -86,4 +92,6 @@ function moveMole() {
   moveMoleTimerId = setTimeout(moveMole, (delay + moleSpeed))
 }
 
+// TODO: cursor replacement
 // TODO: hitmarker animation on hit
+// TODO: score tracker
