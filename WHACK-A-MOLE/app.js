@@ -1,5 +1,4 @@
 const squares = document.querySelectorAll('.square')
-const mole = document.querySelector('.mole')
 const timeLeft = document.querySelector('#time-left')
 const hitsDisplay = document.querySelector('#hits')
 const missesDisplay = document.querySelector('#misses')
@@ -17,20 +16,18 @@ let misses = 0
 let hitPosition
 let moveMoleTimerId = null
 let countDownTimerId = null
-// TODO: have user select speed for mole to move, 
 let moleSpeed = 350
-
 
 function startRestart() {
   // reset hits & misses display
-  hits, misses = 0
+  hits = 0
+  misses = 0
   hitsDisplay.textContent = 0
   missesDisplay.textContent = 0
   accuDisplay.textContent = null
 
   // clear center square's text
   squares[4].textContent = null
-
 
   // reset timer
   clearInterval(countDownTimerId)
@@ -51,15 +48,39 @@ function startRestart() {
   moveMole()
 }
 
-function onHitOrMiss() {
+function onHitOrMiss(e) {
   if (this.id == hitPosition) {
     hits++
-    hitsDisplay.textContent = hits  
+    hitsDisplay.textContent = hits
+    hitMarker(e)
   } else {
     misses++
     missesDisplay.textContent = misses
+    missMarker(e)
   }
   accuDisplay.textContent = hits / (hits + misses) * 100
+}
+
+function hitMarker(e) {
+  let marker = document.createElement('span')
+  marker.style.top = `${e.pageY}px`
+  marker.style.left = `${e.pageX}px`
+  document.querySelector('.mole').appendChild(marker)
+
+  setTimeout(() => {
+    marker.remove()
+  }, 1000);
+}
+
+function missMarker(e) {
+  let miss = document.createElement('span')
+  miss.style.top = `${e.pageY}px`
+  miss.style.left = `${e.pageX}px`
+  document.querySelector('.grid').appendChild(miss)
+
+  setTimeout(() => {
+    miss.remove()
+  }, 500);
 }
 
 // round timer and removal of click events
@@ -93,5 +114,5 @@ function moveMole() {
 }
 
 // TODO: cursor replacement
-// TODO: hitmarker animation on hit
 // TODO: score tracker
+// TODO: have user select speed for mole to move

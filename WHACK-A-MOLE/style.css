@@ -3,6 +3,7 @@
   height: 306px;
   display: flex;
   flex-wrap: wrap;
+  cursor: crosshair;
 }
 
 .square {
@@ -13,5 +14,30 @@
 }
 
 .mole {
-  background-color: blue;
+  background-color: grey;
+}
+
+.grid span {
+  background-image: url("images/missmarker-noBG.png");
+  position: absolute;
+  height: 20px;
+  width: 20px;
+  transform: translate(-50%, -50%);
+  background-size: contain;
+  background-repeat: no-repeat;
+  animation: fadeOut 1s linear;
+}
+
+.mole span {
+  background-image: url("images/hitmarker-noBG.png");
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+  }
 }
