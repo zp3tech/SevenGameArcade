@@ -1,13 +1,15 @@
+const TIME_LENGTH = 10
+
 const squares = document.querySelectorAll('.square')
 const timeLeft = document.querySelector('#time-left')
 const hitsDisplay = document.querySelector('#hits')
 const missesDisplay = document.querySelector('#misses')
 const accuDisplay = document.querySelector('#accuracy')
 const restartButton = document.querySelector('#restart-btn')
+const starter = document.getElementById('start-form')
 
-const TIME_LENGTH = 10
-
-restartButton.addEventListener('click', startRestart)
+starter.addEventListener('submit', startRestart)
+// restartButton.addEventListener('click', startRestart)
 timeLeft.textContent = TIME_LENGTH
 
 let currentTime = TIME_LENGTH
@@ -16,9 +18,11 @@ let misses = 0
 let hitPosition
 let moveMoleTimerId = null
 let countDownTimerId = null
-let moleSpeed = 350
+let moleSpeed = 1000
 
 function startRestart() {
+  event.preventDefault();
+
   // reset hits & misses display
   hits = 0
   misses = 0
@@ -65,7 +69,7 @@ function hitMarker(e) {
   let marker = document.createElement('span')
   marker.style.top = `${e.pageY}px`
   marker.style.left = `${e.pageX}px`
-  document.querySelector('.mole').appendChild(marker)
+  document.querySelector('.grid').appendChild(marker)
 
   setTimeout(() => {
     marker.remove()
@@ -74,6 +78,7 @@ function hitMarker(e) {
 
 function missMarker(e) {
   let miss = document.createElement('span')
+  miss.className = 'missed'
   miss.style.top = `${e.pageY}px`
   miss.style.left = `${e.pageX}px`
   document.querySelector('.grid').appendChild(miss)
@@ -108,11 +113,10 @@ function moveMole() {
   randomSquare.classList.add('mole')
   hitPosition = randomSquare.id
 
-  //set random delay to stutter mole movement, no more than half of moleSpeed
-  let delay = Math.floor(Math.random() * (moleSpeed / 2))
+  //set random delay to stutter mole movement by up to 500ms
+  let delay = Math.floor(Math.random() * 500)
   moveMoleTimerId = setTimeout(moveMole, (delay + moleSpeed))
 }
 
-// TODO: cursor replacement
 // TODO: score tracker
 // TODO: have user select speed for mole to move

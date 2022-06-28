@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,6 +8,7 @@
   <title>Whack-A-Mole</title>
   <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
   <a href="../index.html">HOME</a>
 
@@ -28,8 +30,20 @@
   </div>
 
   <br>
-  <button type="reset" id="restart-btn">Restart</button>
+  <form id="start-form">
+    <button type="submit" id="restart-btn">Start New Round</button>
+    <br>
+    <input type="radio" name="mole_speed" id="slow" value="1000" checked="checked">
+    <label for="slow">Slow (1 sec minimum) </label>
+    <br>
+    <input type="radio" name="mole_speed" id="med" value="500">
+    <label for="med">Medium (1/2 sec minimum) </label>
+    <br>
+    <input type="radio" name="mole_speed" id="fast" value="333">
+    <label for="fast">Fast (1/3 sec minimum) </label>
+  </form>
 
   <script src="app.js"></script>
 </body>
+
 </html>

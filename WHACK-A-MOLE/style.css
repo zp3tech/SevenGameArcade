@@ -15,10 +15,11 @@
 
 .mole {
   background-color: grey;
+  opacity: 50%;
 }
 
 .grid span {
-  background-image: url("images/missmarker-noBG.png");
+  background-image: url("images/hitmarker-noBG.png");
   position: absolute;
   height: 20px;
   width: 20px;
@@ -28,8 +29,8 @@
   animation: fadeOut 1s linear;
 }
 
-.mole span {
-  background-image: url("images/hitmarker-noBG.png");
+.grid span.missed {
+  background-image: url("images/missmarker-noBG.png");
 }
 
 @keyframes fadeOut {
