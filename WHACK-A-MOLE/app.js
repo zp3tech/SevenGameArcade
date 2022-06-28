@@ -6,10 +6,9 @@ const hitsDisplay = document.querySelector('#hits')
 const missesDisplay = document.querySelector('#misses')
 const accuDisplay = document.querySelector('#accuracy')
 const restartButton = document.querySelector('#restart-btn')
-const starter = document.getElementById('start-form')
+const speedForm = document.getElementById('speed-selector')
 
-starter.addEventListener('submit', startRestart)
-// restartButton.addEventListener('click', startRestart)
+restartButton.addEventListener('click', startRestart)
 timeLeft.textContent = TIME_LENGTH
 
 let currentTime = TIME_LENGTH
@@ -20,9 +19,17 @@ let moveMoleTimerId = null
 let countDownTimerId = null
 let moleSpeed = 1000
 
-function startRestart() {
-  event.preventDefault();
+// user selects radio button to change speed of mole movements
+function setSpeed(inputValue) {
+  moleSpeed = inputValue
+}
 
+function startRestart() {
+  // disables speed selections
+  for (let i = 0; i < speedForm.elements.length; i++) {
+    speedForm.elements[i].disabled = true
+  }
+  
   // reset hits & misses display
   hits = 0
   misses = 0
@@ -101,6 +108,11 @@ function countDown() {
       square.classList.remove('mole')
     })
     squares[4].textContent = "TIME!"
+
+    // re-enables speed selector
+    for (let i = 0; i < speedForm.elements.length; i++) {
+      speedForm.elements[i].disabled = false
+    }
   }
 }
 
@@ -119,4 +131,3 @@ function moveMole() {
 }
 
 // TODO: score tracker
-// TODO: have user select speed for mole to move
