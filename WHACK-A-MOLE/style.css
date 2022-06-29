@@ -43,3 +43,7 @@
     opacity: 0;
   }
 }
+
+#high-score {
+  background-color: yellow;
+}

@@ -7,6 +7,7 @@ const missesDisplay = document.querySelector('#misses')
 const accuDisplay = document.querySelector('#accuracy')
 const restartButton = document.querySelector('#restart-btn')
 const speedForm = document.getElementById('speed-selector')
+const scoreboard = document.querySelector('.scoreboard')
 
 restartButton.addEventListener('click', startRestart)
 timeLeft.textContent = TIME_LENGTH
@@ -19,6 +20,30 @@ let moveMoleTimerId = null
 let countDownTimerId = null
 let moleSpeed = 1000
 
+// scoreboard updater
+function sbUpdate() {
+  var newScore = document.createElement("div")
+  newScore.textContent = hits + " hits (" + (hits / (hits + misses) * 100).toFixed(2) + "%)"
+
+  if (scoreboard.childElementCount == 0) {
+    newScore.id = "high-score"
+    // scoreboard.appendChild(newScore)
+    // return
+  } else {
+    // get current high-score number of hits
+    var currHighScore = document.getElementById("high-score").textContent
+    hitsHS = currHighScore.substring(0, currHighScore.indexOf(" "))
+    accuHS = currHighScore.substring(currHighScore.indexOf("(") + 1, currHighScore.indexOf("%"))
+
+    // check if new high-score
+    if (hits > hitsHS || (hits == hitsHS && (hits / (hits + misses) * 100).toFixed(2) > accuHS)) {
+      document.getElementById("high-score").id = null
+      newScore.id = "high-score"
+    }
+  }
+  scoreboard.insertBefore(newScore, scoreboard.children[0])
+}
+
 // user selects radio button to change speed of mole movements
 function setSpeed(inputValue) {
   moleSpeed = inputValue
@@ -29,7 +54,7 @@ function startRestart() {
   for (let i = 0; i < speedForm.elements.length; i++) {
     speedForm.elements[i].disabled = true
   }
-  
+
   // reset hits & misses display
   hits = 0
   misses = 0
@@ -46,7 +71,7 @@ function startRestart() {
 
   // reset mole movement
   clearTimeout(moveMoleTimerId)
-  
+
   // restart timer
   countDownTimerId = setInterval(countDown, 1000)
   timeLeft.textContent = currentTime
@@ -99,10 +124,13 @@ function missMarker(e) {
 function countDown() {
   currentTime--
   timeLeft.textContent = currentTime
+
+  // at end of round
   if (currentTime == 0) {
     clearInterval(countDownTimerId)
     clearTimeout(moveMoleTimerId)
 
+    // stop click listeners on squares
     squares.forEach(square => {
       square.removeEventListener('mousedown', onHitOrMiss)
       square.classList.remove('mole')
@@ -113,6 +141,9 @@ function countDown() {
     for (let i = 0; i < speedForm.elements.length; i++) {
       speedForm.elements[i].disabled = false
     }
+
+    // update scoreboard
+    sbUpdate()
   }
 }
 
@@ -129,5 +160,3 @@ function moveMole() {
   let delay = Math.floor(Math.random() * 500)
   moveMoleTimerId = setTimeout(moveMole, (delay + moleSpeed))
 }
-
-// TODO: score tracker
